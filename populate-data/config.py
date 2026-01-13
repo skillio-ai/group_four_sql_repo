@@ -1,13 +1,16 @@
 from configparser import ConfigParser
+import os
 
-def config(filename='populate-data/database.ini', section='postgresql'):
+def config(filename='database.ini', section='postgresql'):
     parser = ConfigParser()
-    parser.read(filename)
-    db = {}
-    if parser.has_section(section):
-        params = parser.items(section)
-        for param in params:
-            db[param[0]] = param[1]
-    else:
-        raise Exception('Section {0} not found in the {1} file'.format(section, filename))
-    return db
+
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    ini_path = os.path.join(base_dir, filename)
+
+    if not parser.read(ini_path):
+        raise FileNotFoundError(f"Config file not found: {ini_path}")
+
+    if not parser.has_section(section):
+        raise Exception(f"Section {section} not found in {ini_path}")
+
+    return dict(parser.items(section))

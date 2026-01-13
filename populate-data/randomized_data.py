@@ -14,6 +14,13 @@ def populate_customers(con: psycopg2.extensions.connection, n: int):
                         (fake.name(),fake.city(),fake.unique.email()))
     con.commit()
 
+#def print_customer(con: psycopg2.extensions.connection):
+#    with con.cursor() as cur:
+#        cur.execute("SELECT * FROM customers;")
+#        rows = cur.fetchall()
+#        for row in rows:
+#            print(row)
+
 def main():
     con = None
     try:
@@ -21,6 +28,7 @@ def main():
         #print("Connected:", con.closed == 0)
         #print("DSN:", con.dsn)
         #populate_customers(con, 1000)
+        #print_customer(con)
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
