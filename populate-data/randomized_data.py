@@ -20,7 +20,7 @@ def main():
         con = connect()
         #print("Connected:", con.closed == 0)
         #print("DSN:", con.dsn)
-        populate_customers(con, 1000)
+        #populate_customers(con, 1000)
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
