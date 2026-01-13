@@ -1,0 +1,31 @@
+# --- folders / libraries ---
+venv/
+env/
+.env/
+.venv/
+dist/
+build/
+*.egg-info/
+
+# --- Python Internals ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Jupyter Notebooks ---
+.ipynb_checkpoints
+.ipynb
+#remove if ibynb will be used
+
+# --- OS Generated Files ---
+.DS_Store
+Thumbs.db
+
+# --- IDE Settings ---
+.vscode/
+.idea/
+
+# --- files ---
+
+app_functions.py
