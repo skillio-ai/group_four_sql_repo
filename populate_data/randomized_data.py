@@ -14,12 +14,12 @@ def populate_customers(con: psycopg2.extensions.connection, n: int):
                         (fake.name(),fake.city(),fake.unique.email()))
     con.commit()
 
-#def print_customer(con: psycopg2.extensions.connection):
-#    with con.cursor() as cur:
-#        cur.execute("SELECT * FROM customers;")
-#        rows = cur.fetchall()
-#        for row in rows:
-#            print(row)
+def print_customer(con: psycopg2.extensions.connection):
+    with con.cursor() as cur:
+        cur.execute("SELECT * FROM customers;")
+        rows = cur.fetchall()
+        for row in rows:
+            print(row)
 
 def main():
     con = None
