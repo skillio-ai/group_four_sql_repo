@@ -29,3 +29,9 @@ Thumbs.db
 # --- files ---
 
 app_functions.py
+
+# --- // olle ---
+sqlvenv/
+database.ini
+populate_data/database.ini
+#populate-data/
