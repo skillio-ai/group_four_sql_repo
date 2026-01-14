@@ -48,19 +48,53 @@ def get_avg_order_value(con):
 
 #4.2.3
 def get_monthly_orders_and_sales(con):
-    pass
+    with con.cursor() as cur:
+        cur.execute("""
+            SELECT DATE_TRUNC('month',orders.order_date) AS month, COUNT(DISTINCT orders.order_id), COALESCE(SUM(oi.price_at_purchase * oi.quantity), 0) AS total_sales
+            FROM orders
+            JOIN order_items AS oi ON oi.order_id = orders.order_id
+            GROUP BY month
+            ORDER BY month;
+        """)
+        return cur.fetchall()
 
 #4.3.1
 def get_order_value_with_customer_name(con):
-    pass
+    with con.cursor() as cur:
+        cur.execute("""
+            SELECT orders.order_id, customers.name, SUM(oi.price_at_purchase * oi.quantity) AS sales
+            FROM orders
+            JOIN order_items AS oi ON oi.order_id = orders.order_id
+            JOIN customers ON customers.customer_id = orders.customer_id
+            GROUP BY orders.order_id, customers.name;
+        """)
+        return cur.fetchall()
 
 #4.3.2
 def get_top5_customer(con):
-    pass
+    with con.cursor() as cur:
+        cur.execute("""
+            SELECT customers.name AS name, SUM(oi.price_at_purchase * oi.quantity) as total_sales
+            FROM customers
+            JOIN orders ON orders.customer_id = customers.customer_id
+            JOIN order_items AS oi ON oi.order_id = orders.order_id
+            GROUP BY name
+            ORDER BY total_sales DESC
+            LIMIT 5;
+        """)
+        return cur.fetchall()
 
 #4.3.3
 def get_suppliers_with_products(con):
-    pass
+    with con.cursor() as cur:
+        cur.execute("""
+            SELECT suppliers.name, COUNT(products.product_id) AS product
+            FROM suppliers
+            JOIN products ON products.supplier_id = suppliers.supplier_id
+            GROUP BY suppliers.supplier_id
+            ORDER BY product DESC;
+        """)
+        return cur.fetchall()
 
 #4.4.1
 def get_poducts_not_sold(con):

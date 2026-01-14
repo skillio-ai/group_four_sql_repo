@@ -1,6 +1,7 @@
 from populate_data.config import config
 import populate_data.randomized_data
 import psycopg2
+import datetime as dt
 from queries import *
 
 def populate(con: psycopg2.extensions.connection):
@@ -54,16 +55,20 @@ def menu_tree(con: psycopg2.extensions.connection):
             print(f"Average order value: {round(temp[0][0], 1)}")
         elif choice in ("monthly orders and sales", "8"):
             temp=get_monthly_orders_and_sales(con)
-            print(temp)
+            for n in temp:
+                print(f"Total orders and sales by year and month: {n[0].strftime('%Y.%m')}, orders {n[1]}, sales {n[2]}")
         elif choice in ("order value customer", "9"):
             temp=get_order_value_with_customer_name(con)
-            print(temp)
+            for n in temp:
+                print(f"Order: {n[0]} was made by {n[1]} for a total of {n[2]}")
         elif choice in ("top5 customer", "10"):
             temp=get_top5_customer(con)
-            print(temp)
+            for n in temp:
+                print(f"Customer: {n[0]} spent {n[1]}")
         elif choice in ("suppliers products", "11"):
             temp=get_suppliers_with_products(con)
-            print(temp)
+            for n in temp:
+                print(f"Supplier {n[0]} has {n[1]} products")
         elif choice in ("bad poducts", "12"):
             temp=get_poducts_not_sold(con)
             print(temp)
