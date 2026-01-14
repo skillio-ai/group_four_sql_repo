@@ -159,12 +159,12 @@ def main(con: psycopg2.extensions.connection):
             clean_database(con)
 
             # 2. Populate Independent Tables
-            populate_customers(con, 100) 
+            populate_customers(con, 1000) 
             populate_suppliers(con, 20)
             
             # 3. Populate Dependent Tables
-            populate_products(con, 50)
-            populate_orders(con, 100)
+            populate_products(con, 1100)
+            populate_orders(con, 1000)
             
             # 4. Populate Highly Dependent Tables
             populate_order_items(con)
