@@ -174,7 +174,3 @@ def main(con: psycopg2.extensions.connection):
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(f"Error: {error}")
-    finally:
-        if con is not None:
-            con.close()
-            print("\n--- Connection closed ---")

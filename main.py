@@ -17,6 +17,15 @@ def menu_tree(con: psycopg2.extensions.connection):
             populate(con)
         elif choice in ("choices", "2"):
             print("  Choices:\n  ['populate'/'1']: populate the database\n  ['choices'/'2']: print choices again\n  ['end'/'0']: Terminate program")
+        elif choice in ("total orders", "3"):
+            temp=get_total_orders(con)
+            print(temp)
+        elif choice in ("total sales", "4"):
+            temp=get_total_sales(con)
+            print(temp)
+        elif choice in ("get low stock", "5"):
+            temp=get_low_stock_count(con)
+            print(temp)
         elif choice in ("end", "0"):
             break
         else:
