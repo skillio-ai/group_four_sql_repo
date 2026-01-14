@@ -13,6 +13,18 @@ def print_choices():
     ['total orders'/'3']: get the total amount of orders
     ['total sales'/'4']: get the total sales
     ['get low stock'/'5']: get amount of products that have low stock
+    ["sales per product"/ "6"]:
+    ["avg order value"/ "7"]:
+    ["monthly orders and sales"/ "8"]:
+    ["order value customer"/ "9"]:
+    ["top5 customer"/ "10"]:
+    ["suppliers products"/ "11"]:
+    ["bad poducts"/ "12"]:
+    ["customers above treshold"/ "13"]:
+    ["orders by products"/ "14"]:
+    ["daily orders peak"/ "15"]:
+    ["avg monthly deliverytime"/ "16"]:
+    ["percentage sales products"/ "17"]:
     ['end'/'0']: Terminate program""")
 
 def menu_tree(con: psycopg2.extensions.connection):
@@ -32,6 +44,42 @@ def menu_tree(con: psycopg2.extensions.connection):
             print(temp)
         elif choice in ("get low stock", "5"):
             temp=get_low_stock_count(con)
+            print(temp)
+        elif choice in ("sales per product", "6"):
+            temp=get_total_sales_per_product(con)
+            print(temp)
+        elif choice in ("avg order value", "7"):
+            temp=get_avg_order_value(con)
+            print(temp)
+        elif choice in ("monthly orders and sales", "8"):
+            temp=get_monthly_orders_and_sales(con)
+            print(temp)
+        elif choice in ("order value customer", "9"):
+            temp=get_order_value_with_customer_name(con)
+            print(temp)
+        elif choice in ("top5 customer", "10"):
+            temp=get_top5_customer(con)
+            print(temp)
+        elif choice in ("suppliers products", "11"):
+            temp=get_suppliers_with_products(con)
+            print(temp)
+        elif choice in ("bad poducts", "12"):
+            temp=get_poducts_not_sold(con)
+            print(temp)
+        elif choice in ("customers above treshold", "13"):
+            temp=get_customers_bought_above_treshold(con)
+            print(temp)
+        elif choice in ("orders by products", "14"):
+            temp=get_orders_most_products(con)
+            print(temp)
+        elif choice in ("daily orders peak", "15"):
+            temp=get_daily_orders_with_peak(con)
+            print(temp)
+        elif choice in ("avg monthly deliverytime", "16"):
+            temp=get_avg_monthly_deliverytime(con)
+            print(temp)
+        elif choice in ("percentage sales products", "17"):
+            temp=get_percentage_total_sales_from_top_products(con)
             print(temp)
         elif choice in ("end", "0"):
             break
