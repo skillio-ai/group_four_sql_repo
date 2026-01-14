@@ -33,5 +33,5 @@ app_functions.py
 # --- // olle ---
 sqlvenv/
 database.ini
-populate-data/database.ini
+populate_data/database.ini
 #populate-data/

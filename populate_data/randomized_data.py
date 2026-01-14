@@ -7,9 +7,6 @@ from datetime import timedelta
 fake = Faker()
 Faker.seed(333)
 
-def connect():
-    return psycopg2.connect(**config())
-
 def clean_database(con: psycopg2.extensions.connection):
     """
     Wipes the data so script can be re-run.
@@ -153,10 +150,8 @@ def populate_shipments(con: psycopg2.extensions.connection):
             """, (order_id, shipped_date, delivery_date, shipping_cost))
     con.commit()
 
-def main():
-    con = None
+def main(con: psycopg2.extensions.connection):
     try:
-        con = connect()
         if con:
             print("\n--- Connected to database ---")
             
@@ -183,6 +178,3 @@ def main():
         if con is not None:
             con.close()
             print("\n--- Connection closed ---")
-
-if __name__ == "__main__":
-    main()
