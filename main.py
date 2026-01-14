@@ -1,6 +1,7 @@
 from populate_data.config import config
 import populate_data.randomized_data
 import psycopg2
+from queries import *
 
 def populate(con: psycopg2.extensions.connection):
     populate_data.randomized_data.main(con)
