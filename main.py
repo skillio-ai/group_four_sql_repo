@@ -1,17 +1,25 @@
 from populate_data.config import config
+import populate_data.randomized_data
 import psycopg2
+
+def populate(con: psycopg2.extensions.connection):
+    populate_data.randomized_data.main(con)
 
 def menu_tree(con: psycopg2.extensions.connection):
     print("Give the choice for what you want to do.")
+    print("  Choices:\n  ['populate'/'1']: populate the database\n  ['choices'/'2']: print choices again\n  ['end'/'0']: Terminate program")
     while True:
-        print("Choices:\n'end': Terminate program\n'bla': run bla query")
 
         choice = input("Pick: ").strip()
 
-        if choice == "end":
+        if choice in ("populate", "1"):
+            populate(con)
+        elif choice in ("choices", "2"):
+            print("  Choices:\n  ['populate'/'1']: populate the database\n  ['choices'/'2']: print choices again\n  ['end'/'0']: Terminate program")
+        elif choice in ("end", "0"):
             break
         else:
-            pass
+            print("Invalid choice")
 
 def connect():
     return psycopg2.connect(**config())
