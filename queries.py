@@ -26,11 +26,25 @@ def get_low_stock_count(con, threshold: int = 10):
     
 #4.2.1
 def get_total_sales_per_product(con):
-    pass
+    with con.cursor() as cur:
+        cur.execute("""
+            SELECT p.category AS category_, SUM(oi.price_at_purchase * oi.quantity) AS total_sales
+            FROM order_items AS oi
+            JOIN products AS p ON p.product_id = oi.product_id
+            GROUP BY p.category
+            ORDER BY total_sales DESC;
+        """)
+        return cur.fetchall()
 
 #4.2.2
 def get_avg_order_value(con):
-    pass
+    with con.cursor() as cur:
+        cur.execute("""
+            SELECT SUM(oi.price_at_purchase * oi.quantity)/COUNT(DISTINCT orders.order_id) average_order_value
+            FROM orders
+            JOIN order_items AS oi ON oi.order_id = orders.order_id;
+        """)
+        return cur.fetchall()
 
 #4.2.3
 def get_monthly_orders_and_sales(con):

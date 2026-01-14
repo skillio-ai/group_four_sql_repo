@@ -47,10 +47,11 @@ def menu_tree(con: psycopg2.extensions.connection):
             print(temp)
         elif choice in ("sales per product", "6"):
             temp=get_total_sales_per_product(con)
-            print(temp)
+            for n in temp:
+                print(n[0],n[1])
         elif choice in ("avg order value", "7"):
             temp=get_avg_order_value(con)
-            print(temp)
+            print(f"Average order value: {round(temp[0][0], 1)}")
         elif choice in ("monthly orders and sales", "8"):
             temp=get_monthly_orders_and_sales(con)
             print(temp)
