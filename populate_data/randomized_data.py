@@ -1,5 +1,5 @@
 from faker import Faker
-from config import config
+from populate_data.config import config
 import psycopg2
 import random
 from datetime import timedelta
