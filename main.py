@@ -6,17 +6,24 @@ from queries import *
 def populate(con: psycopg2.extensions.connection):
     populate_data.randomized_data.main(con)
 
+def print_choices():
+    print("""  Choices:
+    ['populate'/'1']: populate the database
+    ['choices'/'2']: print choices again
+    ['total orders'/'3']: get the total amount of orders
+    ['total sales'/'4']: get the total sales
+    ['get low stock'/'5']: get amount of products that have low stock
+    ['end'/'0']: Terminate program""")
+
 def menu_tree(con: psycopg2.extensions.connection):
     print("Give the choice for what you want to do.")
-    print("  Choices:\n  ['populate'/'1']: populate the database\n  ['choices'/'2']: print choices again\n  ['end'/'0']: Terminate program")
+    print_choices()
     while True:
-
         choice = input("Pick: ").strip()
-
         if choice in ("populate", "1"):
             populate(con)
         elif choice in ("choices", "2"):
-            print("  Choices:\n  ['populate'/'1']: populate the database\n  ['choices'/'2']: print choices again\n  ['end'/'0']: Terminate program")
+            print_choices()
         elif choice in ("total orders", "3"):
             temp=get_total_orders(con)
             print(temp)
