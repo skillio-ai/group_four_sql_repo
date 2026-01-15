@@ -31,6 +31,7 @@ def print_choices():
 def menu_tree(con: psycopg2.extensions.connection):
     print("Give the choice for what you want to do.")
     print_choices()
+    """ --- Menue tree --- """
     while True:
         choice = input("Pick: ").strip()
         if choice in ("populate", "1"):
@@ -113,13 +114,10 @@ def menu_tree(con: psycopg2.extensions.connection):
         else:
             print("Invalid choice")
 
-def connect():
-    return psycopg2.connect(**config())
-
 def main():
     con = None
     try:
-        con = connect()
+        con = psycopg2.connect(**config())
         menu_tree(con)
     except Exception as e:
         print("Error:", e)
